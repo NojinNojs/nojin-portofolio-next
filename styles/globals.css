@@ -48,11 +48,11 @@ body::before {
 
 /* Specific styles for the header */
 header {
-  margin: 20px auto;
+  margin: 1.25rem auto;
   transition: all 0.3s ease-in-out;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   z-index: 8000;
-  max-width: 1200px;
+  max-width: 75rem;
 }
 
 nav {

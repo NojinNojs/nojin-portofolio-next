@@ -5,25 +5,25 @@ const projects = [
   {
     title: 'Anime List',
     description: 'Search for anime you want to watch.',
-    image: '/ss-animelist.png',
+    image: '/ss-animelist.webp',
     link: 'https://horizonn.nojin.site/'
   },
   {
     title: 'Re-create Sitara',
     description: 'Recreation of the official Sitara.tapera.go.id website.',
-    image: '/ss-sitara.png',
+    image: '/ss-sitara.webp',
     link: 'https://sitara.tapera.nojin.site/'
   },
   {
     title: 'Luminous Shop',
     description: 'An e-commerce website.',
-    image: '/ss-ecommerce.png',
+    image: '/ss-ecommerce.webp',
     link: 'https://shop.nojinjourney.com/'
   },
   {
     title: 'Card',
     description: 'A Linktree alternative.',
-    image: '/ss-card.png',
+    image: '/ss-card.webp',
     link: 'https://card.nojin.site/'
   },
   // Add more projects here
