@@ -2,19 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling behavior */
 html {
   scroll-behavior: smooth;
 }
 
+/* Body styles */
 body {
-  padding-top: 56px;
+  padding-top: 3.5rem;
   background-color: rgb(28, 25, 23);
-  background-image: radial-gradient(
-      at 69% 21%,
-      rgb(136, 19, 55) 0,
-      transparent 56%
-    ),
-    radial-gradient(at 24% 90%, rgb(30, 64, 175) 0, transparent 51%);
+  background-image: radial-gradient(at 69% 21%, rgb(136, 19, 55) 0, transparent 56%), radial-gradient(at 24% 90%, rgb(30, 64, 175) 0, transparent 51%);
   color: #fff;
   overflow: auto;
   min-height: 100vh;
@@ -22,21 +19,17 @@ body {
   z-index: 0;
 }
 
+/* Keyframes for background gradient animation */
 @keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Fixed gradient overlay */
 body::before {
   content: "";
-  position: fixed; /* Change to fixed to ensure it covers the entire viewport */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -46,7 +39,7 @@ body::before {
   animation: gradientMove 15s ease infinite;
 }
 
-/* Specific styles for the header */
+/* Header styles */
 header {
   margin: 1.25rem auto;
   transition: all 0.3s ease-in-out;
@@ -55,32 +48,21 @@ header {
   max-width: 75rem;
 }
 
+/* Navigation styles */
 nav {
   margin: 0 auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Slide down/up animation for mobile menu */
+/* Slide down/up animations for mobile menu */
 @keyframes slideDown {
-  0% {
-    max-height: 0;
-    opacity: 0;
-  }
-  100% {
-    max-height: 100vh;
-    opacity: 1;
-  }
+  0% { max-height: 0; opacity: 0; }
+  100% { max-height: 100vh; opacity: 1; }
 }
 
 @keyframes slideUp {
-  0% {
-    max-height: 100vh;
-    opacity: 1;
-  }
-  100% {
-    max-height: 0;
-    opacity: 0;
-  }
+  0% { max-height: 100vh; opacity: 1; }
+  100% { max-height: 0; opacity: 0; }
 }
 
 #mobile-menu.max-h-screen {
@@ -91,19 +73,22 @@ nav {
   animation: slideUp 0.3s ease forwards;
 }
 
+/* Max width utility */
 .max-w-screen-xl {
-  max-width: 1200px;
+  max-width: 75rem; /* 1200px */
 }
 
+/* Glass effect styles */
 .glasseffect {
   backdrop-filter: blur(25px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
   background-color: rgba(17, 25, 40, 0.55);
-  border-radius: 20px;
+  border-radius: 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.125);
-  transition: all 0.3s ease-in-out; /* Transition for background color */
+  transition: all 0.3s ease-in-out;
 }
 
+/* Button styles with glow effect */
 .btn-glow {
   background: rgba(17, 25, 40, 0.55);
   color: #fff;
@@ -116,10 +101,10 @@ nav {
 
 .btn-glow:hover {
   background: rgba(17, 25, 40, 0.8);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
-    0 0 5px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7);
 }
 
+/* Navigation link styles */
 .nav-link {
   color: #d1d5db; /* Tailwind gray-300 */
   padding: 0.5rem 1rem;
@@ -127,18 +112,13 @@ nav {
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-  /* backdrop-filter: blur(25px) saturate(200%); */
-  /* -webkit-backdrop-filter: blur(25px) saturate(200%); */
-  /* background-color: rgba(17, 25, 40, 0.55); */
-  border-radius: 12px;
-  /* border: 1px solid rgba(255, 255, 255, 0.125); */
+.nav-link:hover, .nav-link.active {
+  border-radius: 0.75rem;
   color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
-    0 0 5px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7), 0 0 5px rgba(255, 255, 255, 0.7);
 }
 
+/* Fullscreen modal styles */
 .fullscreen {
   width: 100% !important;
   height: 100% !important;
@@ -159,18 +139,57 @@ nav {
   max-height: 100% !important;
 }
 
+/* Flex display utility */
 .display-flex {
   display: flex;
 }
 
+/* Hide reCAPTCHA badge */
 .grecaptcha-badge {
   visibility: hidden;
   display: none;
 }
 
+/* Footer styles */
+footer {
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+footer .relative {
+  position: relative;
+  z-index: 10;
+}
+
+/* Border and text utilities */
+.border-white {
+  border: 1px solid #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.border-none {
+  border: none;
+}
+.border-b-2 {
+  border-bottom: 1px solid;
+}
+/* Responsive styles */
 @media (max-width: 1200px) {
   header {
-    margin: 20px;
+    margin: 1.25rem;
   }
 }
 

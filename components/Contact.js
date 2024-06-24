@@ -28,16 +28,18 @@ const Contact = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!formData.name || formData.name.length < 2 || formData.name.length > 100) {
-      setAlert({ show: true, type: 'error', message: 'Name must be between 2 and 100 characters.' });
+    const nameRegex = /^[a-zA-Z ]+$/; // Supports letters and spaces
+
+    if (!formData.name || !nameRegex.test(formData.name) || formData.name.length < 2 || formData.name.length > 100) {
+      setAlert({ show: true, type: 'error', message: 'Name must be between 2 and 100 characters, and contain only letters.' });
       return;
     }
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
       setAlert({ show: true, type: 'error', message: 'Please enter a valid email address.' });
       return;
     }
-    if (!formData.message || formData.message.length < 50 || formData.message.length > 1000) {
-      setAlert({ show: true, type: 'error', message: 'Message must be between 50 and 1000 characters.' });
+    if (!formData.message || formData.message.length < 20 || formData.message.length > 1000) {
+      setAlert({ show: true, type: 'error', message: 'Message must be between 20 and 1000 characters.' });
       return;
     }
 
@@ -74,13 +76,13 @@ const Contact = () => {
     <section id="contact" className="container mx-auto py-20 px-4 md:px-0">
       <h2 className="text-4xl font-bold mb-8 text-center">Contact Me</h2>
       <div className="flex flex-col md:flex-row justify-center md:justify-between gap-8">
-        <form onSubmit={handleSubmit} className="flex-1 max-w-lg mx-auto w-full">
+        <form onSubmit={handleSubmit} className="flex-1 max-w-2xl mx-auto w-full">
           <motion.label
             className="block mb-4"
             whileFocus={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <span className="text-white">Name:</span>
+            <span className="text-white block mb-2">Name:</span>
             <motion.input
               type="text"
               name="name"
@@ -88,7 +90,7 @@ const Contact = () => {
               onChange={handleChange}
               placeholder="Your Name"
               required
-              className="mt-1 block w-full rounded-md bg-transparent border-b-2 border-white text-white placeholder-white focus:outline-none focus:border-blue-500 transition duration-300"
+              className="mt-1 block w-full rounded-lg bg-transparent bg-opacity-50 border-none border-b-2 border-white text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition duration-300 p-2"
               whileHover={{ scale: 1.02 }}
             />
           </motion.label>
@@ -97,7 +99,7 @@ const Contact = () => {
             whileFocus={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <span className="text-white">Email:</span>
+            <span className="text-white block mb-2">Email:</span>
             <motion.input
               type="email"
               name="email"
@@ -105,7 +107,7 @@ const Contact = () => {
               onChange={handleChange}
               placeholder="Your Email"
               required
-              className="mt-1 block w-full rounded-md bg-transparent border-b-2 border-white text-white placeholder-white focus:outline-none focus:border-blue-500 transition duration-300"
+              className="mt-1 block w-full rounded-lg bg-transparent bg-opacity-50 border-none border-b-2 border-white text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition duration-300 p-2"
               whileHover={{ scale: 1.02 }}
             />
           </motion.label>
@@ -114,21 +116,21 @@ const Contact = () => {
             whileFocus={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <span className="text-white">Message:</span>
+            <span className="text-white block mb-2">Message:</span>
             <motion.textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
               placeholder="Your Message"
               required
-              className={`mt-1 block w-full rounded-md bg-transparent border-b-2 text-white placeholder-white focus:outline-none focus:border-blue-500 transition duration-300 ${messageLength === 0 ? 'border-white' : (messageLength < 50 || messageLength > 1000 ? 'border-red-500' : 'border-green-500')}`}
+              className={`mt-1 block w-full rounded-lg bg-transparent bg-opacity-50 border-none border-b-2 text-white placeholder-gray-400 focus:outline-none transition duration-300 p-2 ${messageLength === 0 ? 'border-white' : (messageLength < 20 || messageLength > 1000 ? 'border-red-500' : 'border-green-500')}`}
               whileHover={{ scale: 1.02 }}
             ></motion.textarea>
-            <span className={`absolute right-0 bottom-0 text-sm ${messageLength === 0 ? 'text-white' : (messageLength < 50 || messageLength > 1000 ? 'text-red-500' : 'text-green-500')}`}>{messageLength} / 1000</span>
+            <span className={`absolute right-0 bottom-0 text-sm pr-2 pb-1 ${messageLength === 0 ? 'text-white' : (messageLength < 20 || messageLength > 1000 ? 'text-red-500' : 'text-green-500')}`}>{messageLength} / 1000</span>
           </motion.label>
           <motion.button
             type="submit"
-            className="mt-4 px-4 btn-glow glasseffect ml-auto flex items-center"
+            className="mt-4 px-4 py-2 btn-glow glasseffec text-white rounded-lg ml-auto flex items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             disabled={isLoading}
@@ -151,7 +153,8 @@ const Contact = () => {
           whileHover={{
             scale: 1.1,
             filter: 'drop-shadow(0 0 10px #E4405F)',
-            transition: { duration: 0.3 }
+            transition: { duration: 0.3 },
+            color: '#E4405F'
           }}
           whileTap={{ scale: 0.95 }}
           style={{ filter: 'drop-shadow(0 0 0 transparent)' }}
@@ -166,7 +169,8 @@ const Contact = () => {
           whileHover={{
             scale: 1.1,
             filter: 'drop-shadow(0 0 10px #7289da)',
-            transition: { duration: 0.3 }
+            transition: { duration: 0.3 },
+            color: '#7289da'
           }}
           whileTap={{ scale: 0.95 }}
           style={{ filter: 'drop-shadow(0 0 0 transparent)' }}
