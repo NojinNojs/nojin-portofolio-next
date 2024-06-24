@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
 
@@ -14,38 +14,49 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setShowHeader(false); // Scroll Down
-    } else {
-      setShowHeader(true); // Scroll Up
-    }
-    lastScrollY = window.scrollY;
+  const handleScroll = useCallback(() => {
+    requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
 
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      setShowHeader(true); // Show header when scrolling stops
-    }, 200);
-  };
-
-  const handleSectionChange = () => {
-    const sections = document.querySelectorAll("section");
-    const scrollPos = window.scrollY + 100; // Adjust for offset
-
-    sections.forEach((section) => {
-      if (
-        scrollPos >= section.offsetTop &&
-        scrollPos < section.offsetTop + section.offsetHeight
-      ) {
-        setActiveSection(section.getAttribute("id"));
+      if (currentScrollY > lastScrollY) {
+        setShowHeader(false); // Scroll Down
+      } else {
+        setShowHeader(true); // Scroll Up
       }
+
+      lastScrollY = currentScrollY;
+
+      if (currentScrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setShowHeader(true); // Show header when scrolling stops
+      }, 200);
     });
+  }, []);
+
+  const handleSectionChange = useCallback(() => {
+    requestAnimationFrame(() => {
+      const sections = document.querySelectorAll("section");
+      const scrollPos = window.scrollY + 100; // Adjust for offset
+
+      sections.forEach((section) => {
+        if (
+          scrollPos >= section.offsetTop &&
+          scrollPos < section.offsetTop + section.offsetHeight
+        ) {
+          setActiveSection(section.getAttribute("id"));
+        }
+      });
+    });
+  }, []);
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close menu on link click (for mobile)
   };
 
   useEffect(() => {
@@ -55,14 +66,16 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", handleSectionChange);
     };
-  }, []);
+  }, [handleScroll, handleSectionChange]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
-        showHeader ? "translate-y-0" : "-translate-y-full"
-      } ${isScrolled ? "glasseffect" : "bg-transparent"}`}
-      style={{ transition: 'all 0.3s ease-in-out' }}
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: showHeader ? 0 : -100 }}
+      transition={{ type: "tween", duration: 0.05 }}
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 glasseffect ${
+        isScrolled ? "shadow-lg" : "shadow-none"
+      }`}
     >
       <nav className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between rounded-md">
         <div className="flex items-center">
@@ -81,54 +94,18 @@ const Header = () => {
         </div>
         <div className="hidden md:block">
           <div className="flex space-x-4">
-            <motion.a
-              href="#hero"
-              className={`nav-link ${activeSection === "hero" ? "active" : ""}`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Home
-            </motion.a>
-            <motion.a
-              href="#about"
-              className={`nav-link ${
-                activeSection === "about" ? "active" : ""
-              }`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              About
-            </motion.a>
-            <motion.a
-              href="#certificates"
-              className={`nav-link ${
-                activeSection === "certificates" ? "active" : ""
-              }`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Certificates
-            </motion.a>
-            <motion.a
-              href="#projects"
-              className={`nav-link ${
-                activeSection === "projects" ? "active" : ""
-              }`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Projects
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className={`nav-link ${
-                activeSection === "contact" ? "active" : ""
-              }`}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Contact
-            </motion.a>
+            {['hero', 'about', 'certificates', 'projects', 'contact'].map((section) => (
+              <motion.a
+                key={section}
+                href={`#${section}`}
+                className={`nav-link ${activeSection === section ? "active" : ""}`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </motion.a>
+            ))}
           </div>
         </div>
         <div className="md:hidden">
@@ -156,59 +133,22 @@ const Header = () => {
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <motion.a
-            href="#hero"
-            className={`nav-link block ${
-              activeSection === "hero" ? "active" : ""
-            }`}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            Home
-          </motion.a>
-          <motion.a
-            href="#about"
-            className={`nav-link block ${
-              activeSection === "about" ? "active" : ""
-            }`}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            About
-          </motion.a>
-          <motion.a
-            href="#projects"
-            className={`nav-link block ${
-              activeSection === "projects" ? "active" : ""
-            }`}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            Projects
-          </motion.a>
-          <motion.a
-            href="#certificates"
-            className={`nav-link block ${
-              activeSection === "certificates" ? "active" : ""
-            }`}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            Certificates
-          </motion.a>
-          <motion.a
-            href="#contact"
-            className={`nav-link block ${
-              activeSection === "contact" ? "active" : ""
-            }`}
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            Contact
-          </motion.a>
+          {['hero', 'about', 'certificates', 'projects', 'contact'].map((section) => (
+            <motion.a
+              key={section}
+              href={`#${section}`}
+              className={`nav-link block ${activeSection === section ? "active" : ""}`}
+              onClick={handleLinkClick}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </motion.a>
+          ))}
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

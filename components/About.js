@@ -71,11 +71,11 @@ const About = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <img src="https://img.icons8.com/color/480/html-5--v1.png" alt="HTML5" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
-              <img src="https://img.icons8.com/plasticine/400/css3.png" alt="CSS3" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
-              <img src="/js.svg" alt="JavaScript" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
-              <img src="/php.svg" alt="PHP" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
-              <img src="/nodejs.svg" alt="Node.js" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
+              <img src="/icons8-html-logo.svg" alt="HTML5" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
+              <img src="/icons8-css-logo.svg" alt="CSS3" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
+              <img src="/icons8-javascript.svg" alt="JavaScript" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
+              <img src="/icons8-php-logo.svg" alt="PHP" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
+              <img src="/icons8-node-js.svg" alt="Node.js" className="h-24 md:h-32 lg:h-40 hover:scale-110 transition-transform duration-300" />
             </motion.div>
           </div>
           <div className="space-y-4">
