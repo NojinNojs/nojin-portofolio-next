@@ -8,17 +8,19 @@ const Typewriter = ({
   deleteSpeed = 70,
   delaySpeed = 1500,
 }) => {
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-  const [blink, setBlink] = useState(true);
-  const [delta, setDelta] = useState(typeSpeed);
+  const [index, setIndex] = useState(0); // Current word index
+  const [subIndex, setSubIndex] = useState(0); // Current character index of the word
+  const [deleting, setDeleting] = useState(false); // Whether it's deleting the word
+  const [blink, setBlink] = useState(true); // Cursor blink state
+  const [delta, setDelta] = useState(typeSpeed); // Speed of typing/deleting
 
   useEffect(() => {
+    // Reset index if it exceeds words length
     if (index === words.length) {
       setIndex(0);
     }
 
+    // Handle typing and deleting logic
     if (subIndex === words[index].length + 1 && !deleting) {
       setDeleting(true);
       setDelta(delaySpeed);
@@ -38,21 +40,11 @@ const Typewriter = ({
     }, delta);
 
     return () => clearTimeout(timeout);
-  }, [
-    subIndex,
-    index,
-    deleting,
-    delta,
-    words,
-    typeSpeed,
-    deleteSpeed,
-    delaySpeed,
-  ]);
+  }, [subIndex, index, deleting, delta, words, typeSpeed, deleteSpeed, delaySpeed]);
 
   useEffect(() => {
-    const blinkTimeout = setInterval(() => {
-      setBlink((prev) => !prev);
-    }, 500);
+    // Blink cursor effect
+    const blinkTimeout = setInterval(() => setBlink((prev) => !prev), 500);
     return () => clearInterval(blinkTimeout);
   }, []);
 
@@ -76,24 +68,15 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <motion.div 
-            className="text-xs md:text-sm text-white px-2 py-1 rounded-20 mb-2 md:mb-3 glasseffect"
-            whileHover={{ scale: 1.1 }}
-          >
-            Programmer
-          </motion.div>
-          <motion.div 
-            className="text-xs md:text-sm text-white px-2 py-1 rounded-20 mb-2 md:mb-3 glasseffect"
-            whileHover={{ scale: 1.1 }}
-          >
-            Nojin Portfolio
-          </motion.div>
-          <motion.div 
-            className="text-xs md:text-sm text-white px-2 py-1 rounded-20 mb-2 md:mb-3 glasseffect"
-            whileHover={{ scale: 1.1 }}
-          >
-            Photographer
-          </motion.div>
+          {["Programmer", "Nojin Portfolio", "Photographer"].map((role, index) => (
+            <motion.div 
+              key={index}
+              className="text-xs md:text-sm text-white px-2 py-1 rounded-20 mb-2 md:mb-3 glasseffect"
+              whileHover={{ scale: 1.1 }}
+            >
+              {role}
+            </motion.div>
+          ))}
         </motion.div>
         <h1 className="text-2xl md:text-5xl font-bold md:mb-3 h-16 md:h-24">
           console.log("
@@ -139,7 +122,8 @@ const Hero = () => {
         <img
           src="/programming.svg"
           alt="Programming Illustration"
-          className="w-2/3 md:w-full"
+          className="w-2/3 md:w-full block"
+          loading="lazy"
         />
       </motion.div>
     </section>

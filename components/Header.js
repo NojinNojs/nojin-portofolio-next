@@ -94,18 +94,22 @@ const Header = () => {
         </div>
         <div className="hidden md:block">
           <div className="flex space-x-4">
-            {['hero', 'about', 'certificates', 'projects', 'contact'].map((section) => (
-              <motion.a
-                key={section}
-                href={`#${section}`}
-                className={`nav-link ${activeSection === section ? "active" : ""}`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </motion.a>
-            ))}
+            {["hero", "about", "certificates", "projects", "contact"].map(
+              (section) => (
+                <motion.a
+                  key={section}
+                  href={`#${section}`}
+                  className={`nav-link ${
+                    activeSection === section ? "active" : ""
+                  }`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </motion.a>
+              )
+            )}
           </div>
         </div>
         <div className="md:hidden">
@@ -133,19 +137,23 @@ const Header = () => {
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {['hero', 'about', 'certificates', 'projects', 'contact'].map((section) => (
-            <motion.a
-              key={section}
-              href={`#${section}`}
-              className={`nav-link block ${activeSection === section ? "active" : ""}`}
-              onClick={handleLinkClick}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </motion.a>
-          ))}
+          {["hero", "about", "certificates", "projects", "contact"].map(
+            (section) => (
+              <motion.a
+                key={section}
+                href={`#${section}`}
+                className={`nav-link block ${
+                  activeSection === section ? "active" : ""
+                }`}
+                onClick={handleLinkClick}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </motion.a>
+            )
+          )}
         </div>
       </div>
     </motion.header>
