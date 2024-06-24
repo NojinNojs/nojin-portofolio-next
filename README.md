@@ -1,4 +1,3 @@
-```markdown
 # Nojin's Programming Portfolio
 
 This is the official programming portfolio of Raffi Aqsan (Nojin). This portfolio showcases various projects, skills, and contact information. The website is built with Next.js, Framer Motion, and integrates Google reCAPTCHA for secure form submissions.
