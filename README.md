@@ -1,6 +1,13 @@
 # Nojin's Programming Portfolio
 
+![Nojin's Programming Portfolio Banner](public/banner-nojin-website.webp)
+
 This is the official programming portfolio of Raffi Aqsan (Nojin). This portfolio showcases various projects, skills, and contact information. The website is built with Next.js, Framer Motion, and integrates Google reCAPTCHA for secure form submissions.
+
+<p align="center">
+  <a href="https://nojin.site" target="_blank"><img src="https://img.shields.io/badge/Demo-Live-green?style=for-the-badge&logo=google-chrome" alt="Live Demo"></a>
+  <a href="https://github.com/NojinNojs/nojin-portfolio-next" target="_blank"><img src="https://img.shields.io/badge/GitHub-Repo-blue?style=for-the-badge&logo=github" alt="GitHub Repo"></a>
+</p>
 
 ## Table of Contents
 
@@ -44,7 +51,7 @@ To run this project, follow these steps:
    npm install
    ```
 
-3. Create a `.env` file in the root directory and add the required environment variables, you can see on `.env.example`.
+3. Create a `.env` file in the root directory and add the required environment variables, as shown in `.env.example`.
 
 4. Run the development server:
    ```bash
