@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Analytics } from "@vercel/analytics/react"
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -28,6 +29,7 @@ const Home = () => (
           <meta name="twitter:image" content="/banner-nojin-website.webp" />
         </Head>
     <Header />
+    <Analytics />
     <main className="max-w-screen-xl mx-auto">
       <Hero />
       <About />
