@@ -17,6 +17,27 @@ const certificates = [
     ],
     description: 'Certified by Dicoding Academy',
   },
+  {
+    title: 'Codepolitan HTML Certificate',
+    images: [
+      '/codepolitan-html/codepolitan-html.svg'
+    ],
+    description: 'Certified by Codepolitan',
+  },
+  {
+    title: 'Codepolitan CSS Certificate',
+    images: [
+      '/codepolitan-css/codepolitan-css.svg'
+    ],
+    description: 'Certified by Codepolitan',
+  },
+  {
+    title: 'Certified Developer',
+    images: [
+      '/alibaba-acc.svg'
+    ],
+    description: 'Certified by Alibaba Cloud',
+  },
   // Tambahkan lebih banyak sertifikat di sini
 ];
 
