@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "esnext",
+      "allowJs": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./*"],
+        "@/components/*": ["components/*"],
+        "@/lib/utils/*": ["lib/utils/*"]
+      }
+    },
+    "include": ["**/*"],
+    "exclude": ["node_modules"]
+  }
+  
